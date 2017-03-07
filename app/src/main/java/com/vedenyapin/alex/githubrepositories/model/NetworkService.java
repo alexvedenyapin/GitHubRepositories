@@ -2,7 +2,11 @@ package com.vedenyapin.alex.githubrepositories.model;
 
 import android.util.LruCache;
 
+import com.vedenyapin.alex.githubrepositories.model.data.Repo;
+import com.vedenyapin.alex.githubrepositories.model.responses.LoginResponse;
+
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -11,6 +15,11 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -23,7 +32,6 @@ public class NetworkService {
 
     private static final String baseUrl ="https://api.github.com/";
     private ApiInterface apiInterface;
-    private OkHttpClient okHttpClient;
     private LruCache<Class<?>, Observable<?>> observablesCache;
 
     public NetworkService() {
@@ -31,7 +39,7 @@ public class NetworkService {
     }
 
     public NetworkService(String baseUrl) {
-        okHttpClient = buildClient();
+        OkHttpClient okHttpClient = buildClient();
         observablesCache = new LruCache<>(10);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -83,5 +91,19 @@ public class NetworkService {
         }
 
         return preparedObservable;
+    }
+
+    public interface ApiInterface {
+
+        @GET("users/{user}/repos")
+        Observable<List<Repo>> getRepositories(@Path("user") String user);
+
+        @FormUrlEncoded
+        @POST("login/oauth/access_token")
+        Observable<LoginResponse> authorize(@Field("grant_type") String grantType,
+                                            @Field("client_id") String clientId,
+                                            @Field("client_secret") String clientSecret,
+                                            @Field("username") String userName,
+                                            @Field("password") String password);
     }
 }

@@ -15,21 +15,22 @@ import rx.schedulers.Schedulers;
  */
 
 public class ModelImpl implements Model {
-    private ApiInterface apiInterface = GitHubApplication.getNetworkService().getAPI();
+    private NetworkService networkService = GitHubApplication.getNetworkService();
     private static final String grantType ="password";
     private static final String clientId ="9d2b4db9af4876c46e31";
     private static final String clientSecret ="24c80febb08809f3e6b269f18f6a21a6305ef972";
 
     @Override
-    public Observable<List<Repo>> getRepoList(String name) {
-        return apiInterface.getRepositories(name)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+    public Observable<List<Repo>> getRepoList(String userName) {
+        Observable<List<Repo>> reposObservable = (Observable<List<Repo>>)
+                networkService.getPreparedObservable(networkService.getAPI().getRepositories(userName), Repo.class, true, true);
+
+        return reposObservable;
     }
 
     @Override
     public Observable<LoginResponse> authorize(String userName, String password) {
-        return apiInterface.authorize(grantType, clientId, clientSecret, userName, password)
+        return networkService.getAPI().authorize(grantType, clientId, clientSecret, userName, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

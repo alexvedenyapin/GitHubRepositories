@@ -1,6 +1,5 @@
 package com.vedenyapin.alex.githubrepositories.presenter;
 
-import com.vedenyapin.alex.githubrepositories.R;
 import com.vedenyapin.alex.githubrepositories.model.Model;
 import com.vedenyapin.alex.githubrepositories.model.ModelImpl;
 import com.vedenyapin.alex.githubrepositories.model.data.Repo;
@@ -31,7 +30,8 @@ public class RepoListPresenterImpl implements RepoListPresenter {
     private void loadRepos() {
         mSubscription = mModel.getRepoList(mUserName).subscribe(new Observer<List<Repo>>() {
             @Override
-            public void onCompleted() {}
+            public void onCompleted() {
+            }
 
             @Override
             public void onError(Throwable e) {
