@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.vedenyapin.alex.githubrepositories.R;
 import com.vedenyapin.alex.githubrepositories.model.data.Repo;
+import com.vedenyapin.alex.githubrepositories.utils.DateUtils;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mRepoName.setText(mRepos.get(position).getName());
         holder.mRepoStars.setText(String.valueOf(mRepos.get(position).getStarCount()));
-        holder.mRepoLastUpdate.setText(mRepos.get(position).getUpdatedAt());
+        holder.mRepoLastUpdate.setText(DateUtils.convertDateString(mRepos.get(position).getUpdatedAt()));
     }
 
     @Override

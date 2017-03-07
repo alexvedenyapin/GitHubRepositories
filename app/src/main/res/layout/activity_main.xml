@@ -6,27 +6,27 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_user_name"
-        android:layout_width="100dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
         <EditText
             android:id="@+id/et_user_name"
-            android:layout_width="100dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="@string/user_name" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_user_pass"
-        android:layout_width="100dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/til_user_name"
         android:layout_centerHorizontal="true">
 
         <EditText
             android:id="@+id/et_user_pass"
-            android:layout_width="100dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="@string/password" />
     </android.support.design.widget.TextInputLayout>

@@ -23,7 +23,7 @@ public class ModelImpl implements Model {
     @Override
     public Observable<List<Repo>> getRepoList(String userName) {
         Observable<List<Repo>> reposObservable = (Observable<List<Repo>>)
-                networkService.getPreparedObservable(networkService.getAPI().getRepositories(userName), Repo.class, true, true);
+                networkService.getPreparedObservable(networkService.getAPI().getRepositories(userName), userName, true, true);
 
         return reposObservable;
     }

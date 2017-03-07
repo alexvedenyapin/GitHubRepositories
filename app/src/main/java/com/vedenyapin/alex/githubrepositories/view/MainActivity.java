@@ -3,6 +3,7 @@ package com.vedenyapin.alex.githubrepositories.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,8 +38,26 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @OnClick(R.id.btn_login)
-    public void submit() {
-        mMainPresenter.onLoginClicked(etUserName.getText().toString(), etUserPass.getText().toString());
+    public void login() {
+        boolean areFieldsCorrect = checkFields();
+        if (areFieldsCorrect) {
+            mMainPresenter.onLoginClicked(etUserName.getText().toString(), etUserPass.getText().toString());
+        }
+    }
+
+    private boolean checkFields() {
+        boolean result = true;
+        if (TextUtils.isEmpty(etUserName.getText().toString())) {
+            Toast.makeText(this, getString(R.string.enter_user_name), Toast.LENGTH_SHORT).show();
+            result = false;
+        }
+
+        if (TextUtils.isEmpty(etUserPass.getText().toString())) {
+            Toast.makeText(this, getString(R.string.enter_password), Toast.LENGTH_SHORT).show();
+            result = false;
+        }
+
+        return result;
     }
 
     @Override

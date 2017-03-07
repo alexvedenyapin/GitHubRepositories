@@ -32,7 +32,7 @@ public class NetworkService {
 
     private static final String baseUrl ="https://api.github.com/";
     private ApiInterface apiInterface;
-    private LruCache<Class<?>, Observable<?>> observablesCache;
+    private LruCache<String, Observable<?>> observablesCache;
 
     public NetworkService() {
         this(baseUrl);
@@ -73,11 +73,11 @@ public class NetworkService {
         observablesCache.evictAll();
     }
 
-    public Observable<?> getPreparedObservable(Observable<?> unPreparedObservable, Class<?> clazz, boolean cacheObservable, boolean useCache) {
+    public Observable<?> getPreparedObservable(Observable<?> unPreparedObservable, String userName, boolean cacheObservable, boolean useCache) {
         Observable<?> preparedObservable = null;
 
         if (useCache)
-            preparedObservable = observablesCache.get(clazz);
+            preparedObservable = observablesCache.get(userName);
 
         if (preparedObservable != null)
             return preparedObservable;
@@ -87,7 +87,7 @@ public class NetworkService {
 
         if (cacheObservable){
             preparedObservable = preparedObservable.cache();
-            observablesCache.put(clazz, preparedObservable);
+            observablesCache.put(userName, preparedObservable);
         }
 
         return preparedObservable;
