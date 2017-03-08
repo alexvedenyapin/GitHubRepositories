@@ -45,4 +45,10 @@ public class RepoListPresenterImpl implements RepoListPresenter {
             }
         });
     }
+
+    @Override
+    public void unSubscribe() {
+        if (mSubscription != null && !mSubscription.isUnsubscribed())
+            mSubscription.unsubscribe();
+    }
 }

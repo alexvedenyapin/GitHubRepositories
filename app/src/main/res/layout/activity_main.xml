@@ -14,6 +14,8 @@
             android:id="@+id/et_user_name"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
             android:hint="@string/user_name" />
     </android.support.design.widget.TextInputLayout>
 
@@ -28,6 +30,8 @@
             android:id="@+id/et_user_pass"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
             android:hint="@string/password" />
     </android.support.design.widget.TextInputLayout>
 

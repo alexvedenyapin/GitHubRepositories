@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
         mMainPresenter = new MainMainPresenterImpl(this);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mMainPresenter.unSubscribe();
+    }
+
     @OnClick(R.id.btn_login)
     public void login() {
         boolean areFieldsCorrect = checkFields();

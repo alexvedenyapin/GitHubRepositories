@@ -53,4 +53,10 @@ public class MainMainPresenterImpl implements MainPresenter {
     private void openRepoListActivity() {
         mMainView.showRepoList();
     }
+
+    @Override
+    public void unSubscribe() {
+        if (mSubscription != null && !mSubscription.isUnsubscribed())
+            mSubscription.unsubscribe();
+    }
 }

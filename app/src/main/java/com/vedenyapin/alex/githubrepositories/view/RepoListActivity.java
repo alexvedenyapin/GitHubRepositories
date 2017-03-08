@@ -20,6 +20,7 @@ public class RepoListActivity extends AppCompatActivity implements RepoListView 
     private RecyclerView mRecyclerView;
     private ProgressDialog progressDialog;
     private String mUserName;
+    private RepoListPresenter mRepoListPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,13 @@ public class RepoListActivity extends AppCompatActivity implements RepoListView 
         progressDialog = new ProgressDialog(this);
 
         prepareList();
-        RepoListPresenter mRepoListPresenter = new RepoListPresenterImpl(this, mUserName);
+        mRepoListPresenter = new RepoListPresenterImpl(this, mUserName);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mRepoListPresenter.unSubscribe();
     }
 
     private void prepareList() {
