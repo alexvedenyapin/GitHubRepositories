@@ -14,9 +14,9 @@
             android:id="@+id/et_user_name"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:hint="@string/user_name"
             android:inputType="text"
-            android:maxLines="1"
-            android:hint="@string/user_name" />
+            android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -30,9 +30,9 @@
             android:id="@+id/et_user_pass"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:hint="@string/password"
             android:inputType="text"
-            android:maxLines="1"
-            android:hint="@string/password" />
+            android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/til_user_pass"
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:text="@string/login"/>
+        android:layout_marginTop="20dp"
+        android:text="@string/login" />
 </RelativeLayout>

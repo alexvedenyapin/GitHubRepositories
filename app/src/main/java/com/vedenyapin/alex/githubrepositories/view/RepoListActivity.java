@@ -20,17 +20,16 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class RepoListActivity extends AppCompatActivity implements RepoListView {
-    private RecyclerView mRecyclerView;
-    private ProgressDialog progressDialog;
-    private String mUserName;
     @Inject
     RepoListPresenterImpl mRepoListPresenter;
+    private RecyclerView mRecyclerView;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repo_list);
-        mUserName = getIntent().getStringExtra(MainActivity.EXTRA_USER_NAME);
+        String mUserName = getIntent().getStringExtra(MainActivity.EXTRA_USER_NAME);
         progressDialog = new ProgressDialog(this);
 
         prepareList();
@@ -57,6 +56,7 @@ public class RepoListActivity extends AppCompatActivity implements RepoListView 
 
     @Override
     public void showError(String error) {
+        hideProgress();
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 

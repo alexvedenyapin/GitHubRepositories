@@ -11,15 +11,15 @@ import java.util.Date;
 public class DateUtils {
 
     public static String convertDateString(String notFormattedDate) {
-        SimpleDateFormat formatterOld = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
-        SimpleDateFormat formatterNew = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        SimpleDateFormat oldFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
+        SimpleDateFormat newFormatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
         Date date = null;
         try {
-            date = formatterOld.parse(notFormattedDate);
+            date = oldFormatter.parse(notFormattedDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return formatterNew.format(date);
+        return newFormatter.format(date);
     }
 }

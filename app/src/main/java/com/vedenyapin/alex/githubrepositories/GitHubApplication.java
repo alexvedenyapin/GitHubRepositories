@@ -14,9 +14,7 @@ public class GitHubApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         networkService = new NetworkService();
-
     }
 
     public static NetworkService getNetworkService(){

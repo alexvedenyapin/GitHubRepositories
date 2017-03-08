@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void showError(int res) {
-        Toast.makeText(this, getString(res), Toast.LENGTH_SHORT).show();
+    public void showError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

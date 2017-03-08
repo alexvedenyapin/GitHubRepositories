@@ -5,7 +5,7 @@ package com.vedenyapin.alex.githubrepositories.view;
  */
 
 public interface MainView {
-    void showError(int res);
+    void showError(String error);
 
     void showRepoList();
 }

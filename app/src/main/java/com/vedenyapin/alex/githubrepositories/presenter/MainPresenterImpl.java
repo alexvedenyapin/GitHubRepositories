@@ -39,7 +39,7 @@ public class MainPresenterImpl implements MainPresenter {
 
             @Override
             public void onError(Throwable e) {
-                mMainView.showError(R.string.login_error);
+                mMainView.showError(e.getLocalizedMessage());
             }
 
             @Override
