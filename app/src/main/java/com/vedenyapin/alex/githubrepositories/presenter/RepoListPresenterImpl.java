@@ -7,6 +7,8 @@ import com.vedenyapin.alex.githubrepositories.view.RepoListView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observer;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
@@ -16,13 +18,14 @@ import rx.subscriptions.Subscriptions;
  */
 
 public class RepoListPresenterImpl implements RepoListPresenter {
-    private RepoListView mRrepoListView;
+    private RepoListView mRepoListView;
     private Model mModel = new ModelImpl();
     private Subscription mSubscription = Subscriptions.empty();
     private String mUserName;
 
+    @Inject
     public RepoListPresenterImpl(RepoListView repoListView, String userName) {
-        mRrepoListView = repoListView;
+        mRepoListView = repoListView;
         mUserName = userName;
         loadRepos();
     }
@@ -35,13 +38,12 @@ public class RepoListPresenterImpl implements RepoListPresenter {
 
             @Override
             public void onError(Throwable e) {
-                //TODO
-                mRrepoListView.showError(e.getLocalizedMessage());
+                mRepoListView.showError(e.getLocalizedMessage());
             }
 
             @Override
             public void onNext(List<Repo> repos) {
-                mRrepoListView.showRepos(repos);
+                mRepoListView.showRepos(repos);
             }
         });
     }

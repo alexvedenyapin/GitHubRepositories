@@ -8,6 +8,8 @@ import com.vedenyapin.alex.githubrepositories.view.MainView;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
@@ -15,14 +17,13 @@ import rx.subscriptions.Subscriptions;
  * Created by Alex Vedenyapin on 06.03.2017
  */
 
-public class MainMainPresenterImpl implements MainPresenter {
+public class MainPresenterImpl implements MainPresenter {
 
     private MainView mMainView;
-    private Model mModel = new ModelImpl();
     private Subscription mSubscription = Subscriptions.empty();
-    List<Repo> mRepositories = new ArrayList<>();
 
-    public MainMainPresenterImpl(MainView mainView) {
+    @Inject
+    public MainPresenterImpl(MainView mainView) {
         mMainView = mainView;
     }
 

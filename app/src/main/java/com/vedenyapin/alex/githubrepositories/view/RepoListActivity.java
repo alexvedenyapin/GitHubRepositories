@@ -9,18 +9,22 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.vedenyapin.alex.githubrepositories.R;
+import com.vedenyapin.alex.githubrepositories.components.DaggerRepoListComponent;
 import com.vedenyapin.alex.githubrepositories.model.data.Repo;
-import com.vedenyapin.alex.githubrepositories.presenter.RepoListPresenter;
+import com.vedenyapin.alex.githubrepositories.modules.RepoListPresenterModule;
 import com.vedenyapin.alex.githubrepositories.presenter.RepoListPresenterImpl;
 import com.vedenyapin.alex.githubrepositories.view.adapters.RepoAdapter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class RepoListActivity extends AppCompatActivity implements RepoListView {
     private RecyclerView mRecyclerView;
     private ProgressDialog progressDialog;
     private String mUserName;
-    private RepoListPresenter mRepoListPresenter;
+    @Inject
+    RepoListPresenterImpl mRepoListPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,10 @@ public class RepoListActivity extends AppCompatActivity implements RepoListView 
         progressDialog = new ProgressDialog(this);
 
         prepareList();
-        mRepoListPresenter = new RepoListPresenterImpl(this, mUserName);
+        DaggerRepoListComponent.builder()
+                .repoListPresenterModule(new RepoListPresenterModule(this, mUserName))
+                .build()
+                .inject(this);
     }
 
     @Override

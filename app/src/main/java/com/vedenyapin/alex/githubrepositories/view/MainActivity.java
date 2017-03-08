@@ -9,8 +9,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.vedenyapin.alex.githubrepositories.R;
-import com.vedenyapin.alex.githubrepositories.presenter.MainMainPresenterImpl;
-import com.vedenyapin.alex.githubrepositories.presenter.MainPresenter;
+import com.vedenyapin.alex.githubrepositories.components.DaggerMainComponent;
+import com.vedenyapin.alex.githubrepositories.modules.MainPresenterModule;
+import com.vedenyapin.alex.githubrepositories.presenter.MainPresenterImpl;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +29,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @BindView(R.id.btn_login)
     Button btnLogin;
 
-    private MainPresenter mMainPresenter;
+    @Inject
+    MainPresenterImpl mMainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mMainPresenter = new MainMainPresenterImpl(this);
+        DaggerMainComponent.builder()
+                .mainPresenterModule(new MainPresenterModule(this))
+                .build()
+                .inject(this);
     }
 
     @Override
